@@ -95,3 +95,9 @@ These are web-sized JPEG copies of PNGs the user supplied in `images/user-upload
 
 - `home/hero-section/hero-bg-desktop.jpg` and `hero-bg-mobile.jpg`: the hero background, from `hero-bg-desktop.png` and `hero-bg-mobile.png`.
 - `home/hero-section/slide-1-main.jpg`: from an earlier upload, `slide-1-main.png`, which the user has since removed from that folder. Used for the "Bamboo polos" tile in the Polos mega menu.
+
+## Category tile images (copies of user uploads)
+
+`home/categories/*.jpg` are web-sized JPEG copies of the six PNGs the user supplied in `images/user-uploads/home/categories/` on 2026-09-30 (AI-generated for this mockup). They are used only in the "Shop by category" grid on the home page. The originals are untouched; regenerate a copy if its original changes.
+
+The older `home/category-tiles/*.jpg` files (from greylongg.com) are still used by the mega menus, the mobile menu thumbnails and the combos banner.

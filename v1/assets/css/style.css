@@ -1385,10 +1385,18 @@ h3 {
   padding-top: var(--s-3);
 }
 
+/* Every title takes exactly two lines (three on phones) so rating, price
+   and swatches line up across a row and all cards end at the same height. */
 .product-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: calc(1.4em * 2);
   font-size: 15px;
   font-weight: 500;
   line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 .product-card__title a:hover {
@@ -1492,6 +1500,15 @@ h3 {
   }
 }
 
+/* Narrower cards: long titles need a third line */
+@media (max-width: 1200px) {
+  .product-card__title {
+    min-height: calc(1.4em * 3);
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
 @media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1505,7 +1522,10 @@ h3 {
   }
 
   .product-card__title {
+    min-height: calc(1.4em * 3);
     font-size: 14px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
   }
 
   .product-card__body {
@@ -1579,6 +1599,8 @@ h3 {
   margin-top: var(--s-4);
   color: rgba(250, 249, 246, 0.82);
   font-size: 18px;
+  /* Evens out the lines so a single word never sits alone on the last line */
+  text-wrap: balance;
 }
 
 .hero__actions {
@@ -1668,71 +1690,213 @@ h3 {
   }
 }
 
-/* Category tiles */
+/* Category tiles: bento grid, Polos large on the left, Corporate tall on the right */
 .cat-tiles {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--s-4);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: clamp(220px, 19vw, 280px);
+  gap: var(--s-3);
 }
 
-.cat-tile__img {
+.cat-tile {
+  position: relative;
+  display: block;
   overflow: hidden;
   background: var(--stone);
-  aspect-ratio: 1;
+  color: var(--white);
 }
 
-.cat-tile__img img {
+.cat-tile--lg {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.cat-tile--tall {
+  grid-column: 5;
+  grid-row: 1 / span 2;
+}
+
+.cat-tile img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  transition: transform 0.6s ease;
+  transition: transform 0.7s ease;
 }
 
 .cat-tile:hover img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
-.cat-tile span {
-  display: block;
-  margin-top: var(--s-3);
+.cat-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.18) 0%, rgba(20, 20, 20, 0) 35%, rgba(20, 20, 20, 0.72) 100%);
+  transition: background var(--ease);
+}
+
+.cat-tile--tall::after {
+  background: linear-gradient(180deg, rgba(31, 31, 31, 0.45) 0%, rgba(31, 31, 31, 0.35) 40%, rgba(31, 31, 31, 0.88) 100%);
+}
+
+.cat-tile__num,
+.cat-tile__text,
+.cat-tile__arrow {
+  position: absolute;
+  z-index: 1;
+}
+
+.cat-tile__num {
+  top: var(--s-3);
+  left: var(--s-3);
+  font-family: var(--font-display);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.08em;
-  text-align: center;
-  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.cat-tile__text {
+  right: 64px;
+  bottom: var(--s-3);
+  left: var(--s-3);
+}
+
+.cat-tile__text strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.cat-tile__text small {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.cat-tile--lg .cat-tile__num,
+.cat-tile--lg .cat-tile__text {
+  left: var(--s-4);
+}
+
+.cat-tile--lg .cat-tile__num {
+  top: var(--s-4);
+}
+
+.cat-tile--lg .cat-tile__text {
+  bottom: var(--s-4);
+}
+
+.cat-tile--lg .cat-tile__text strong {
+  font-size: 36px;
+  letter-spacing: -0.02em;
+}
+
+.cat-tile--lg .cat-tile__text small {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.cat-tile__arrow {
+  right: var(--s-3);
+  bottom: var(--s-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius);
+  transition: background var(--ease), color var(--ease), border-color var(--ease);
+}
+
+.cat-tile--lg .cat-tile__arrow {
+  right: var(--s-4);
+  bottom: var(--s-4);
+  width: 48px;
+  height: 48px;
+}
+
+.cat-tile__arrow .lucide {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--ease);
+}
+
+.cat-tile:hover .cat-tile__arrow {
+  border-color: var(--off-white);
+  background: var(--off-white);
+  color: var(--charcoal);
+}
+
+.cat-tile:hover .cat-tile__arrow .lucide {
+  transform: translate(2px, -2px);
+}
+
+.cat-tile--tall .cat-tile__text small {
+  color: var(--moss-light);
+  opacity: 1;
 }
 
 @media (max-width: 1024px) {
   .cat-tiles {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: clamp(180px, 24vw, 240px);
+  }
+
+  .cat-tile--tall {
+    grid-column: 1 / -1;
+    grid-row: span 2;
+  }
+
+  /* Wide crop here, so keep the faces in frame (overrides the inline desktop position) */
+  .cat-tile--tall img {
+    object-position: center 14% !important;
   }
 }
 
 @media (max-width: 768px) {
   .cat-tiles {
-    display: flex;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
     gap: 12px;
-    margin-inline: calc(var(--gutter) * -1);
-    padding-inline: var(--gutter);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    scrollbar-width: none;
-  }
-
-  .cat-tiles::-webkit-scrollbar {
-    display: none;
   }
 
   .cat-tile {
-    flex: 0 0 40%;
-    scroll-snap-align: start;
+    aspect-ratio: 1;
   }
 
-  .cat-tile span {
-    margin-top: 10px;
+  .cat-tile--lg,
+  .cat-tile--tall {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .cat-tile--lg .cat-tile__text strong {
+    font-size: 28px;
+  }
+
+  .cat-tile__text strong {
+    font-size: 17px;
+  }
+
+  .cat-tile__text small {
     font-size: 12px;
+  }
+
+  .cat-tile:not(.cat-tile--lg):not(.cat-tile--tall) .cat-tile__arrow {
+    display: none;
+  }
+
+  .cat-tile:not(.cat-tile--lg):not(.cat-tile--tall) .cat-tile__text {
+    right: var(--s-3);
   }
 }
 
