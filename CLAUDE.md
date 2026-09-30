@@ -46,9 +46,9 @@ v1/                     # Design round 1 (new rounds → v2/, v3/ … copy forwa
   - Accent: `#4F6B4A` (moss): sustainability tags, fabric story, button hover
   - Discount % only, never large areas: `#B5442F` (brick)
   - Dividers, input borders: `#E3E0DA` (mist)
-- **Type (from the design plan, two families max):**
-  - Display and H2: **Cormorant Garamond** 500 (56/34 px and 36/26 px, desktop/mobile)
-  - Everything else (body, product titles, UI): **DM Sans**; labels, menu and buttons are 13 px, 600, uppercase, 0.08em tracking
+- **Type (chosen by us on 2026-09-30, replacing the design plan's serif + DM Sans; use only these two families):**
+  - Headings: **Poppins** 500 (48/30 px for H1 and display, 32/24 px for H2, desktop/mobile)
+  - Everything else (body, product titles, UI): **Inter**; labels, menu and buttons are 13 px, 600, uppercase, 0.08em tracking
   - Load both from Google Fonts
   - Use the logo image for the logo, not a font. The current logo files were copied from the live site into `images/claude-uploads/home/logo/`.
 - **Layout rules (from the design plan):** max content width 1320 px; side padding 48 px desktop, 16 px mobile; sections 96 px apart desktop, 56 px mobile; square corners (2 px radius at most); 1 px dividers instead of boxes and shadows; 48 px buttons; Lucide icons at 1.5 px stroke; animation on hover only, no auto-play or marquees.

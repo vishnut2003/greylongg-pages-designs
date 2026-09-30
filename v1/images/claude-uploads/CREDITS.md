@@ -91,4 +91,7 @@ Every file in this folder was downloaded from the client's own public storefront
 
 ## Hero images (copies of user uploads)
 
-`home/hero-section/slide-N-main.jpg` and `slide-N-inset.jpg` (N = 1 to 3) are web-sized JPEG copies of the PNGs the user supplied in `images/user-uploads/home/hero/` on 2026-09-30 (AI-generated for this mockup). The originals are untouched; regenerate the copies if the originals change.
+These are web-sized JPEG copies of PNGs the user supplied in `images/user-uploads/home/hero/` on 2026-09-30 (AI-generated for this mockup). The originals are untouched; regenerate a copy if its original changes.
+
+- `home/hero-section/hero-bg-desktop.jpg` and `hero-bg-mobile.jpg`: the hero background, from `hero-bg-desktop.png` and `hero-bg-mobile.png`.
+- `home/hero-section/slide-1-main.jpg`: from an earlier upload, `slide-1-main.png`, which the user has since removed from that folder. Used for the "Bamboo polos" tile in the Polos mega menu.

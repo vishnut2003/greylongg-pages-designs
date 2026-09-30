@@ -255,25 +255,16 @@
     onScroll();
   }
 
-  /* Hero slider (manual only, no autoplay) -------------------------------- */
-  var hero = $(".hero");
-  if (hero) {
-    var slides = $$(".hero__slide", hero);
-    var frames = $$(".hero__frame", hero);
-    var heroTabs = $$(".hero__tab", hero);
-    var current = 0;
-
-    var show = function (n) {
-      current = (n + slides.length) % slides.length;
-      [slides, frames, heroTabs].forEach(function (set) {
-        set.forEach(function (el, i) { el.classList.toggle("is-active", i === current); });
-      });
-      heroTabs.forEach(function (t, i) { t.setAttribute("aria-selected", i === current); });
+  /* Hero fills the first screen: tell the CSS how tall the bars above it are */
+  var heroEl = $(".hero");
+  if (heroEl) {
+    var setHeroOffset = function () {
+      var top = heroEl.getBoundingClientRect().top + window.scrollY;
+      heroEl.style.setProperty("--hero-offset", Math.round(top) + "px");
     };
-
-    heroTabs.forEach(function (t, i) { t.addEventListener("click", function () { show(i); }); });
-    $("[data-hero='prev']", hero).addEventListener("click", function () { show(current - 1); });
-    $("[data-hero='next']", hero).addEventListener("click", function () { show(current + 1); });
+    window.addEventListener("resize", setHeroOffset);
+    window.addEventListener("load", setHeroOffset);
+    setHeroOffset();
   }
 
   /* Tabs ------------------------------------------------------------------- */
