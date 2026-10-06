@@ -27,6 +27,7 @@ v1/                     # Design round 1 (new rounds → v2/, v3/ … copy forwa
     claude-uploads/     # Images Claude creates or downloads (placeholders, icons, backgrounds)
 ```
 
+- **Current round: `v2/`.** `v1/` was sent to the client on 2026-10-06 and is frozen; its feedback (branded perfume photos, printed tee on the Street tile, more visibility for printed tees) is being applied in `v2/`. The client's perfume photos live in `v2/images/user-uploads/home/fragrance/`.
 - Plain HTML + CSS + vanilla JS. Pages open directly from the file system (`file://`) with no server, so use relative paths only and no ES module imports that need a server.
 - CDN libraries (Google Fonts, icon sets, Swiper, etc.) are fine.
 - Keep shared styles in one stylesheet under `assets/` (e.g. `assets/css/style.css`) so every page stays consistent. Put design tokens in `:root` CSS variables.
@@ -35,7 +36,7 @@ v1/                     # Design round 1 (new rounds → v2/, v3/ … copy forwa
 
 ## Brand direction
 
-**Nothing below is confirmed by the client yet.** Colours, type and layout rules follow our own proposal, `project-details/Greylongg-Website-Structure-and-Design-Plan.pdf` (section 7), chosen on 2026-09-30 over the live-site theme colours. The tokens live in `:root` in `v1/assets/css/style.css`. When the client confirms or changes colours, fonts or direction, update this section and mark the item as confirmed.
+**Nothing below is confirmed by the client yet.** Colours, type and layout rules follow our own proposal, `project-details/Greylongg-Website-Structure-and-Design-Plan.pdf` (section 7), chosen on 2026-09-30 over the live-site theme colours. The tokens live in `:root` in `v2/assets/css/style.css` (same values as v1). When the client confirms or changes colours, fonts or direction, update this section and mark the item as confirmed.
 
 - **Mood:** a quiet, confident menswear label; warm neutrals, lots of white space, big photos, very little text on images.
 - **Colors (from the design plan):**
